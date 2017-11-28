@@ -2,8 +2,8 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "Serli 2";
-const char* password = "Sit_Vis&Nobiscum@LaForce2";
+const char* ssid = <SSID>;
+const char* password = <PASSWORD>;
 
 // constants won't change. They're used here to set pin numbers:
 const int buttonPin = D5;     // button CALL API
