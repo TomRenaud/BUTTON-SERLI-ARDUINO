@@ -43,7 +43,7 @@ void callAPICoffee() {
  
     HTTPClient http;  //Declare an object of class HTTPClient
  
-    http.begin("http://serli-button.cleverapps.io/api/button/button-coffee");  //Specify request destination
+    http.begin("http://serlibutton.cleverapps.io/api/button/button-coffee");  //Specify request destination
     int httpCode = http.GET();                                                                  //Send the request
  
     if (httpCode > 0) { //Check the returning code
@@ -64,7 +64,7 @@ void callAPIApero() {
  
     HTTPClient http;  //Declare an object of class HTTPClient
  
-    http.begin("http://serli-button.cleverapps.io/api/button/button-apero");  //Specify request destination
+    http.begin("http://serlibutton.cleverapps.io/api/button/button-apero");  //Specify request destination
     int httpCode = http.GET();                                                                  //Send the request
  
     if (httpCode > 0) { //Check the returning code
@@ -122,14 +122,14 @@ void loop() {
       if(cpt == 0) {
         // INC CPT +1
         cpt = 1;
-        // CALL API COFFEE
-        callAPICoffee(); 
+        // CALL API SAY SONOS
+        callSaySonosAPI();
       }
     } else {
       if(cpt == 0) {
         // INC CPT +1
         cpt = 1;
-        // CALL API APEROOO
+        // CALL API PLAY SOUND SONOS
         callPlaySoundSonosAPI();
       }
     }
