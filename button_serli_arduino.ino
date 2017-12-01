@@ -1,9 +1,15 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
+#include <SocketIOClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = <SSID>;
-const char* password = <PASSWORD>;
+SocketIOClient client;
+
+char host[] = "192.168.86.10";
+int port = 5005;
+
+const char* ssid = <YOUR_SSID>;
+const char* password = <YOUR_PASSWORD>;
 
 // constants won't change. They're used here to set pin numbers:
 const int buttonPin = D5;     // button CALL API
@@ -35,6 +41,8 @@ void setup() {
     Serial.print("Connecting..");
  
   }
+
+  //client.connect(host, port);
 }
 
 void callAPICoffee() {
@@ -42,20 +50,18 @@ void callAPICoffee() {
   if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
  
     HTTPClient http;  //Declare an object of class HTTPClient
- 
-    http.begin("http://serlibutton.cleverapps.io/api/button/button-coffee");  //Specify request destination
-    int httpCode = http.GET();                                                                  //Send the request
- 
-    if (httpCode > 0) { //Check the returning code
- 
-      String payload = http.getString();   //Get the request response payload
-      Serial.println(payload);                     //Print the response payload
- 
-    }
- 
+
+    //client.send("tag", "button-coffee", "button-coffee");
+    
+    http.begin("http://192.168.86.10:5005/button-coffee");
+    http.GET();                                                                 
     http.end();   //Close connection
  
   }
+}
+
+void event(const char * payload, size_t length) {
+  Serial.print("test");
 }
 
 void callAPIApero() {
@@ -64,16 +70,8 @@ void callAPIApero() {
  
     HTTPClient http;  //Declare an object of class HTTPClient
  
-    http.begin("http://serlibutton.cleverapps.io/api/button/button-apero");  //Specify request destination
-    int httpCode = http.GET();                                                                  //Send the request
- 
-    if (httpCode > 0) { //Check the returning code
- 
-      String payload = http.getString();   //Get the request response payload
-      Serial.println(payload);                     //Print the response payload
- 
-    }
- 
+    http.begin("http://192.168.86.10:5005/button-apero");
+    http.GET();                                                                 
     http.end();   //Close connection
  
   }
@@ -123,7 +121,7 @@ void loop() {
         // INC CPT +1
         cpt = 1;
         // CALL API SAY SONOS
-        callSaySonosAPI();
+        callAPICoffee();
       }
     } else {
       if(cpt == 0) {
